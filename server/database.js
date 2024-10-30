@@ -18,11 +18,12 @@ const connectToMongoDB = async () => {
             client = await MongoClient.connect(uri, options);
             console.log("Connected to MongoDB");
         } catch (error) {
-            console.log(error);
+            console.error("Failed to connect to MongoDB:", error);
+            throw error; // Throw error to notify calling functions
         }
     }
     return client;
-    // it is a good practiceto use the same client if its already connected except creating a new one every single time
+    // it is a good practice to use the same client if its already connected except creating a new one every single time
 }
 const getConnectedClient = () => client;
 

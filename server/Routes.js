@@ -3,14 +3,15 @@ const router = express.Router();
 const {getConnectedClient} = require("./database");
 const {ObjectId} = require("mongodb");
 
-const getCollection = () => {
+const getCollection = async () => {
+    await connectToMongoDB(); // Ensure connection is established
     const client = getConnectedClient();
-    const collection = client.db("todosdb").collection("todos");
-    return collection;  
-}
+    return client.db("todosdb").collection("todos");
+};
 
 //GET Todos
 router.get("/todos", async (req, res) => {
+    
     const collection = getCollection();
     const todos = await collection.find({}).toArray();
 
