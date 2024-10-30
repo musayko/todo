@@ -4,7 +4,6 @@ const {getConnectedClient} = require("./database");
 const {ObjectId} = require("mongodb");
 
 const getCollection = async () => {
-    await connectToMongoDB(); // Ensure connection is established
     const client = getConnectedClient();
     const collection = client.db("todosdb").collection("todos");
     return collection;
